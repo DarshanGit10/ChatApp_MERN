@@ -1,12 +1,14 @@
 import './App.css';
 import Dashboard from './modules/Dashboard';
-import Form from './modules/Form';
+// import Form from './modules/Form';
 
 function App() {
   return (
     <>
-      <Form />
+    <div>
+      {/* <Form /> */}
       <Dashboard />
+      </div>
     </> 
     )
 
