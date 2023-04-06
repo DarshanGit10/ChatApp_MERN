@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({
-    isLoginPage = true
+    isLoginPage = false
 }) => {
 
     const [data, setData] = useState({
@@ -14,6 +15,7 @@ const Form = ({
         password: ''
     })
 
+    const navigate = useNavigate()
 
     return (
         <>
@@ -92,7 +94,9 @@ const Form = ({
                     </form>
                     <div className="my-3">
                         {isLoginPage ? `Didn't have account?` : 'Already have an account?'}
-                        <span className="mx-2" style={{ color: "blue" }}>{isLoginPage ? "Sign Up" : "Login"}</span>
+                        <span className="mx-2" style={{ color: "blue", cursor: 'pointer' }} 
+                        onClick={()=> navigate(`/users/${isLoginPage ? 'signup' : 'login'}`)}>{isLoginPage ? "Sign Up" : "Login"}
+                        </span>
                     </div>
                 </div>
             </div>

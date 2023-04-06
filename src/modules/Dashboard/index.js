@@ -45,9 +45,9 @@ const Dashboard = () => {
                         </div>
                         <div>
                             {
-                                contacts.map(({ name, status, img }) => {
+                                contacts.map(({ name, status, img }, index) => {
                                     return (
-                                        <div className='my-4 d-flex align-items-center' style={{ borderBottom: "1px solid #407c87 " }}>
+                                        <div key={index} className='my-4 d-flex align-items-center' style={{ borderBottom: "1px solid #407c87 " }}>
                                             <div style={{ cursor: "pointer" }} className='d-flex'>
                                                 <div className='mt-2'>{img}</div>
                                                 <div>
@@ -58,6 +58,7 @@ const Dashboard = () => {
                                         </div>
                                     )
                                 })
+                                
                             }
                         </div>
                     </div>
