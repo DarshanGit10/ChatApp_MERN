@@ -64,11 +64,58 @@ const Dashboard = () => {
                 </div>
 
 
-                <div className="column middle" style={{ backgroundColor: "#bbb" }}>
-                    <h2>Column 2</h2>
-                    <p>Some text..</p>
+                <div className="column middle" style={{ backgroundColor: "#d3e1e2" }}>
+                    <div className="mid_container1 ">
+                        <div className="mid_top">
+                        <div style={{cursor:'pointer'}}><i className="fa-solid fa-user-astronaut fa-2xl mx-4 mb-3"></i></div>
+                        <div>
+                            <h5 className='mt-2 '>Robin</h5>
+                            <p style={{ fontSize: "13px", marginTop: "1px" }} className='blockquote-footer '>Online</p>
+                        </div>
+                        <div style={{marginLeft:'370px'}}>
+                        <i className="fa-solid fa-phone fa-2xl"></i>
+                        </div>
+                        </div>
+                    </div>
+                    
+
+                    <div className="mid_chats">
+                        <div className="mid_chat_content">
+                            <div className="mid_chat_box_left">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam voluptatum fugit cupiditate, 
+                            </div>
+                            <div className="mid_chat_box_right">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aspernatur totam earum quidem officiis aut.
+                            </div>                            <div className="mid_chat_box_left">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam voluptatum fugit cupiditate, 
+                            </div>
+                            <div className="mid_chat_box_right">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aspernatur totam earum quidem officiis aut.
+                            </div>                            <div className="mid_chat_box_left">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam voluptatum fugit cupiditate, 
+                            </div>
+                            <div className="mid_chat_box_right">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aspernatur totam earum quidem officiis aut.
+                            </div>                            <div className="mid_chat_box_left">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam voluptatum fugit cupiditate, 
+                            </div>
+                            <div className="mid_chat_box_right">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aspernatur totam earum quidem officiis aut.
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className='msg_box'>
+                            <input type="text" placeholder='Type a message'/>
+                            <i className="fa-sharp fa-solid fa-paper-plane fa-xl"></i>
+                            <i className="fa-sharp fa-solid fa-paperclip fa-xl"></i>
+                    </div>
+                    
                 </div>
-                <div className="column right" style={{ backgroundColor: "#ccc" }}>
+
+
+
+                <div className="column right" style={{ backgroundColor: "#eef1f6" }}>
                     <h2>Column 3</h2>
                     <p>Some text..</p>
                 </div>

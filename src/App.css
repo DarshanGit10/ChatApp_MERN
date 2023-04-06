@@ -3,4 +3,6 @@
 body{
     background-color: #d3e1e2;
     font-family: 'Averia Sans Libre', cursive;
+    margin: 0;
+    padding: 0;
 }
