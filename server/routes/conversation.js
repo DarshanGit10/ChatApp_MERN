@@ -25,19 +25,19 @@ router.get("/conversation/:userId", async (req, res) => {
     const conversations = await Conversations.find({
       members: { $in: [userId] },
     });
-    const conversationUserData = await Promise.all(
+    const conversationUserData = Promise.all(
       conversations.map(async (conversation) => {
         const receiverId = conversation.members.find(
           (member) => member !== userId
         );
-        const receiver = await Users.findById(receiverId);
+        const user = await Users.findById(receiverId);
         return {
-          receiver: { email: receiver.email, fullName: receiver.fullName },
+          user: {  receiverId: user._id, email: user.email, fullName: user.fullName },
           conversationId: conversation._id,
         };
       })
     );
-    res.status(200).json(conversationUserData);
+    res.status(200).json(await conversationUserData);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal Server Error" });

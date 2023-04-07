@@ -14,8 +14,32 @@ const Form = ({
         email: '',
         password: ''
     })
-
     const navigate = useNavigate()
+    const handleOnSubmit = async (e) => {
+        e.preventDefault()
+        // check if password and confirm password match
+        if (!isLoginPage && data.password !== data.confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+        const response = await fetch(`http://localhost:8000/api/${isLoginPage ? 'login' : 'register'}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        const resData = await response.json()
+        console.log(resData)
+        if(resData.token){
+            localStorage.setItem('user:token', resData.token)
+            localStorage.setItem('user:detail', JSON.stringify(resData.user))
+            navigate('/')
+        }
+    }
+
+   
 
     return (
         <>
@@ -23,7 +47,7 @@ const Form = ({
                 <div className="form_container">
                     <h2>Welcome {isLoginPage && 'Back'} !!! </h2>
                     <h4 style={{ marginBottom: "20px" }}> {isLoginPage ? "Login to get explored" : "Sign up now to get started"}</h4>
-                    <form>
+                    <form onSubmit={handleOnSubmit}>
                         <div className="mb-3">
                             {!isLoginPage && <div className="mb-3">
                                 <label htmlFor="fullname" className="form-label">
@@ -50,6 +74,7 @@ const Form = ({
                                 aria-describedby="emailHelp"
                                 placeholder="Enter your Email address"
                                 value={data.email}
+                                required
                                 onChange={(e) => setData({ ...data, email: e.target.value })}
                             />
                             <div id="emailHelp" className="form-text">
@@ -94,8 +119,8 @@ const Form = ({
                     </form>
                     <div className="my-3">
                         {isLoginPage ? `Didn't have account?` : 'Already have an account?'}
-                        <span className="mx-2" style={{ color: "blue", cursor: 'pointer' }} 
-                        onClick={()=> navigate(`/users/${isLoginPage ? 'signup' : 'login'}`)}>{isLoginPage ? "Sign Up" : "Login"}
+                        <span className="mx-2" style={{ color: "blue", cursor: 'pointer' }}
+                            onClick={() => navigate(`/users/${isLoginPage ? 'signup' : 'login'}`)}>{isLoginPage ? "Sign Up" : "Login"}
                         </span>
                     </div>
                 </div>

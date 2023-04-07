@@ -12,11 +12,13 @@ router.post(
         try {
             const{fullName, password, email} = req.body;
             if(!fullName || !password || !email){
-                res.status(400).send("Fill all the fields")
+              res.status(400).json({ error: "Fill all the fields" });
+
             }else{
                 const isAlreadyExist = await Users.findOne({email});
                 if(isAlreadyExist){
-                    res.status(400).send("Email already exist")
+                  res.status(400).json({ error: "Email already exists" });
+
                 }else{
                     const newUser = new Users({fullName, email});
                     bcrypt.hash(password, 10, ((err, hashedPassword)=>{
@@ -24,12 +26,12 @@ router.post(
                         newUser.save()
                         next();
                     }))
-                    return res.status(200).send('User registered successfully')
+                    return res.status(200).json('User registered successfully')
                 }
             }
         } catch (err) {
             console.log(err);
-          res.status(500).json({success,  error: "Internal Server Error" });
+          res.status(500).json({error: "Internal Server Error" });
         }
     }
 )
@@ -64,7 +66,15 @@ router.post('/login', async (req, res, next) => {
                 { _id: user._id },
                 { $set: { token } }
               );
-              res.json({ token });
+              res.json({ 
+                user: {
+                  id: user.id,
+                  email: user.email,
+                  fullName: user.fullName
+                },
+                token
+              });
+              
             });
           }
         }
