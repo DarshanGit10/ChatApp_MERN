@@ -40,18 +40,11 @@ router.get('/message/:conversationId', async (req, res) => {
         const conversationId = req.params.conversationId;
         if(conversationId === 'new'){return res.status(200).json([])}
         const messages = await Messages.find({ conversationId });
-        const messageUserData = [];
-        for (let i = 0; i < messages.length; i++) {
-            const user = await Users.findById(messages[i].senderId);
-            messageUserData.push({
-                user: {
-                    email: user.email,
-                    fullName: user.fullName,
-                },
-                message: messages[i].message,
-            });
-        }
-        res.status(200).json(messageUserData);
+        const messageUserData = Promise.all(messages.map(async (message) => {
+            const user = await Users.findById(message.senderId);
+            return { user: { id: user._id, email: user.email, fullName: user.fullName }, message: message.message }
+        }));
+        res.status(200).json(await messageUserData);
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: "Internal Server Error" });

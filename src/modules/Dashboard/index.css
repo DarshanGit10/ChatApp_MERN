@@ -30,6 +30,7 @@
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.24);
     padding: 22px;
+
   }
 
   .mid_top{
@@ -60,6 +61,7 @@
     background-color: #eef1f6;
     color: #407678;
     padding: 12px;
+    margin-top: 10px;
   }
 
   .mid_chat_box_right{
@@ -69,6 +71,11 @@
     margin-left: auto;
     color: #eef1f6;
     padding: 12px;
+    margin-top: 10px;
+  }
+
+  .msg_box{
+    display: flex;
   }
 
   .msg_box input{
@@ -79,7 +86,12 @@
     border: 2px solid #407678;
   }
 
-  .msg_box i{
-    margin-left: 20px;
+
+  .icons_send{
+    border: 2px solid #407678;
+    border-radius: 25px;
+    padding: 10px;
     cursor: pointer;
+    margin: 0px 8px;
+    background-color: #eef1f6;
   }
