@@ -87,21 +87,14 @@ router.post('/login', async (req, res, next) => {
   
   
   // Route 3
-  router.get('/users', async (req, res) => { 
+  router.get('/users/:userId', async (req, res) => { 
     try {
-        const users = await Users.find();
-        const userData = [];
-        for (let i = 0; i < users.length; i++) {
-            userData.push({
-                id: users[i]._id,
-                user: {
-                    email: users[i].email,
-                    fullName: users[i].fullName,
-                },
-                userId: users[i]._id
-            });
-        }
-        res.status(200).json(userData);
+      const userId = req.params.userId;
+        const users = await Users.find({ _id: { $ne: userId } });
+        const usersData = Promise.all(users.map(async (user) => {
+          return { user: { email: user.email, fullName: user.fullName, receiverId: user._id } }
+      }))
+      res.status(200).json(await usersData);
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: "Internal Server Error" });

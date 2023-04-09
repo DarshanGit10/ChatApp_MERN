@@ -43,13 +43,7 @@
     border-bottom: 2px solid rgba(0, 0, 0, 0.584);
   }
 
-  .mid_chats{
-    height: 67%;
-    width: 100%;
-    margin: 15px auto;
-    overflow: scroll;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.584);
-  }
+
 
   .mid_chat_content{
     padding: 10px 14px;
@@ -95,3 +89,55 @@
     margin: 0px 8px;
     background-color: #eef1f6;
   }
+
+  .contacts_head{
+    margin-top: 38px;
+    margin-left: 20px;
+  }
+
+  .contacts_list {
+    height: 80%;
+    width: 100%;
+    margin: 15px auto;
+    overflow-y: scroll; /* Only show vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  
+    /* Scrollbar Styles */
+    scrollbar-width: thin;
+    scrollbar-color: #ddd #333
+  }
+  .mid_chats{
+    height: 67%;
+    width: 100%;
+    margin: 15px auto;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.584);
+  }
+
+  /* Webkit Scrollbar Styles */
+  .mid_chats::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .mid_chats::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  
+  .mid_chats::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey; 
+  }
+   .contacts_list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .contacts_list::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  
+  .contacts_list::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey; 
+  }
+  
