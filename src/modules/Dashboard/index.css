@@ -11,6 +11,7 @@
   
   .left, .right {
     width: 25vw;
+    
   }
   
   .middle {
@@ -97,14 +98,11 @@
 
   .contacts_list {
     height: 80%;
-    width: 100%;
+    width: 75%;
     margin: 15px auto;
     overflow-y: scroll; /* Only show vertical scrollbar */
     overflow-x: hidden; /* Hide horizontal scrollbar */
   
-    /* Scrollbar Styles */
-    scrollbar-width: thin;
-    scrollbar-color: #ddd #333
   }
   .mid_chats{
     height: 67%;
@@ -115,29 +113,8 @@
     border-bottom: 2px solid rgba(0, 0, 0, 0.584);
   }
 
-  /* Webkit Scrollbar Styles */
-  .mid_chats::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .mid_chats::-webkit-scrollbar-track {
-    background: #fff;
-  }
-  
-  .mid_chats::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey; 
-  }
-   .contacts_list::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .contacts_list::-webkit-scrollbar-track {
-    background: #fff;
-  }
-  
-  .contacts_list::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey; 
+  .messages-container {
+    height: 69vh; /* Set a fixed height for the container */
+    overflow-y: scroll; /* Add vertical scroll */
   }
   

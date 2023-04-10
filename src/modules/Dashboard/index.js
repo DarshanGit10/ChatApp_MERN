@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
+import {io} from 'socket.io-client'
+
 
 const Dashboard = () => {
   const [user, setUser] = useState(
@@ -9,7 +11,33 @@ const Dashboard = () => {
   const [messages, setMessages] = useState({});
   const [message, setMessage] = useState("");
   const [users, setUsers] = useState([]);
-  // console.log(users);
+  const [socket, setSocket] = useState(null);
+  const messageRef = useRef(null)
+
+
+  useEffect(()=>{
+    setSocket(io('http://localhost:8080'))
+  },[])
+
+
+	useEffect(() => {
+		socket?.emit('addUser', user?.id);
+    socket?.on('getUsers', users =>{
+      console.log('Active Users: ', users)
+    } )
+    socket?.on('getMessage', data => {
+			setMessages(prev => ({
+				...prev,
+				messages: [...prev.messages, { user: data.user, message: data.message }]
+			}))
+		})
+	}, [socket])
+
+  useEffect(() => {
+		messageRef?.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [messages?.messages])
+
+  
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user:detail"));
@@ -60,7 +88,14 @@ const Dashboard = () => {
   };
 
   const sendMessage = async (e) => {
-    console.log(messages?.conversationId, user?.id, message,messages?.receiver?.receiverId )
+    
+		socket?.emit('sendMessage', {
+			senderId: user?.id,
+			receiverId: messages?.receiver?.receiverId,
+			message,
+			conversationId: messages?.conversationId
+		});
+    // console.log(messages?.conversationId, user?.id, message,messages?.receiver?.receiverId )
     const res = await fetch(`http://localhost:8000/api/message`, {
       method: "POST",
       headers: {
@@ -88,11 +123,12 @@ const Dashboard = () => {
             </div>
           </div>
           <hr />
-          <div className="mx-5">
+          <div className="mx-5" >
             <div style={{ color: "#407c87", fontSize: "24px", fontWeight: "400" }}>
               Messages
             </div>
-            <div>
+            <div className="messages-container " 
+>
               {conversations.length > 0 ? (
                 conversations.map(({ conversationId, user }, {index}) => {
                   return (
@@ -164,9 +200,12 @@ const Dashboard = () => {
                       ? "mid_chat_box_right"
                       : "mid_chat_box_left";
                     return (
+                      <>
                       <div key={index} className={className}>
                         {message}
                       </div>
+                      <div ref={messageRef}></div>
+                      </>
                     );
                   }
                 )
