@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 import {io} from 'socket.io-client'
-
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user:detail"))
-  );
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState({});
   const [message, setMessage] = useState("");
@@ -88,7 +86,7 @@ const Dashboard = () => {
   };
 
   const sendMessage = async (e) => {
-    
+    setMessage("");
 		socket?.emit('sendMessage', {
 			senderId: user?.id,
 			receiverId: messages?.receiver?.receiverId,
@@ -96,7 +94,7 @@ const Dashboard = () => {
 			conversationId: messages?.conversationId
 		});
     // console.log(messages?.conversationId, user?.id, message,messages?.receiver?.receiverId )
-    const res = await fetch(`http://localhost:8000/api/message`, {
+   await fetch(`http://localhost:8000/api/message`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,8 +106,14 @@ const Dashboard = () => {
         receiverId: messages?.receiver?.receiverId,
       }),
     });
-    setMessage("");
+   
   };
+
+  let history = useNavigate();
+  const handleLogout = () =>{
+    localStorage.removeItem("user:token");
+    history("/users/login")
+  }
 
   return (
     <>
@@ -130,7 +134,7 @@ const Dashboard = () => {
             <div className="messages-container " 
 >
               {conversations.length > 0 ? (
-                conversations.map(({ conversationId, user }, {index}) => {
+                conversations.map(({ conversationId, user }, index) => {
                   return (
                     <div
                       key={index}
@@ -183,9 +187,6 @@ const Dashboard = () => {
                     {messages?.receiver?.email}
                   </p>
                 </div>
-                <div style={{ marginLeft: "230px" }}>
-                  <i className="fa-solid fa-phone fa-2xl"></i>
-                </div>
               </div>
             </div>
           )}
@@ -194,7 +195,7 @@ const Dashboard = () => {
             <div className="mid_chat_content">
               {messages?.messages?.length > 0 ? (
                 messages.messages.map(
-                  ({ message, user: { id } = {} }, { index }) => {
+                  ({ message, user: { id } = {} },  index ) => {
                     const isCurrentUser = id === user.id;
                     const className = isCurrentUser
                       ? "mid_chat_box_right"
@@ -241,27 +242,18 @@ const Dashboard = () => {
                   />
                 </button>
               </div>
-
-              <div className="icons_send">
-                <button disabled={!message} style={{ all: "unset" }}>
-                  <i
-                    className="fa-sharp fa-solid fa-paperclip fa-xl"
-                    style={{
-                      opacity: !message ? 0.5 : 1,
-                      cursor: !message ? "not-allowed" : "pointer",
-                    }}
-                  />
-                </button>
-              </div>
             </div>
           )}
         </div>
 
         <div className="column right" style={{ backgroundColor: "#eef1f6" }}>
+          <div className="contacts_header">
+          <button  onClick={handleLogout}>Log Out</button>
+          </div>
           <h2 className="contacts_head">Contacts</h2>
           <div className="contacts_list">
               {users.length > 0 ? (
-                users.map(({ userId, user }, {index}) => {
+                users.map(({ userId, user }, index) => {
                   return (
                     <div
                       key={index}

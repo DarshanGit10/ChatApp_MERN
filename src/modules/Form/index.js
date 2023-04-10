@@ -32,6 +32,12 @@ const Form = ({
             });
         const resData = await response.json()
         console.log(resData)
+        if(resData === 'User registered successfully'){
+            alert("User created successfully.");
+            setTimeout(() => {
+                navigate("/users/login");
+              }, 1500);
+        }
         if(resData.token){
             localStorage.setItem('user:token', resData.token)
             localStorage.setItem('user:detail', JSON.stringify(resData.user))

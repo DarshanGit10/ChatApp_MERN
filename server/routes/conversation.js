@@ -25,7 +25,7 @@ router.get("/conversation/:userId", async (req, res) => {
     const conversations = await Conversations.find({
       members: { $in: [userId] },
     });
-    const conversationUserData = Promise.all(
+    const conversationUserData = await Promise.all(
       conversations.map(async (conversation) => {
         const receiverId = conversation.members.find(
           (member) => member !== userId

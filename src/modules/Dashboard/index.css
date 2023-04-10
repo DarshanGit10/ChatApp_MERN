@@ -52,7 +52,7 @@
 
   .mid_chat_box_left{
     width: 300px;
-    border-radius: 25px;
+    border-radius: 0px 15px 15px 15px;
     background-color: #eef1f6;
     color: #407678;
     padding: 12px;
@@ -61,7 +61,7 @@
 
   .mid_chat_box_right{
     width: 300px;
-    border-radius: 25px;
+    border-radius: 15px 0px 15px 15px;
     background-color:#407678;
     margin-left: auto;
     color: #eef1f6;
@@ -79,6 +79,7 @@
     border-radius: 10px;
     background-color: #eef1f6;
     border: 2px solid #407678;
+    margin-left: 25px;
   }
 
 
@@ -87,21 +88,46 @@
     border-radius: 25px;
     padding: 10px;
     cursor: pointer;
-    margin: 0px 8px;
+    margin: 0px 25px;
     background-color: #eef1f6;
   }
 
   .contacts_head{
-    margin-top: 38px;
+    margin-top: 10px;
     margin-left: 20px;
+  }
+
+  .contacts_header{
+    float: right;
+    margin-top: 15px;
+  }
+
+  .contacts_header button{
+    width: 100px;
+    border: 1px solid #fcbc58;
+    padding: 5px;
+   background-color: #f57c51;
+   font-weight: 900;
+   color: #f6f8e2;
+   border-radius: 20px;
+  }
+
+  .contacts_header button:hover{
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #fcbc58;
+   background-color: #f6f8e2;
+   font-weight: 900;
+   color: #f57c51;
+   border-radius: 20px;
   }
 
   .contacts_list {
     height: 80%;
     width: 75%;
     margin: 15px auto;
-    overflow-y: scroll; /* Only show vertical scrollbar */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; 
+    overflow-x: hidden; 
   
   }
   .mid_chats{
