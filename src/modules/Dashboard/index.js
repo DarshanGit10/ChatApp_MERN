@@ -112,6 +112,7 @@ const Dashboard = () => {
   let history = useNavigate();
   const handleLogout = () =>{
     localStorage.removeItem("user:token");
+    localStorage.removeItem("user:detail");
     history("/users/login")
   }
 
